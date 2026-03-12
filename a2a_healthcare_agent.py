@@ -66,12 +66,12 @@ def main() -> None:
         name="Healthcare Agent",
         description="A personal concierge for Healthcare Information, customized to your policy.",
         llm=GeminiChatModel(
-            "gemini-3-flash-preview",
+            "gemini-2.5-flash",
             allow_parallel_tool_calls=True,
         ),
         # If using Vertex AI
         # llm = VertexAIChatModel(
-        #    model_id="gemini-3-flash-preview",
+        #    model_id="gemini-2.5-flash",
         #    project= os.environ.get("GOOGLE_CLOUD_PROJECT"),
         #    location="global",
         #    allow_parallel_tool_calls=True,

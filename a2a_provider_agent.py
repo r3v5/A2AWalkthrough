@@ -1,5 +1,6 @@
 import asyncio
 import os
+from typing import TYPE_CHECKING
 
 from a2a.types import (
     AgentCapabilities,
@@ -10,10 +11,12 @@ from langchain.agents import create_agent
 from langchain_litellm import ChatLiteLLM
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.sessions import StdioConnection
-from langgraph.graph.state import CompiledStateGraph
 from langgraph_a2a_server import A2AServer
 
 from helpers import setup_env
+
+if TYPE_CHECKING:
+    from langgraph.graph.state import CompiledStateGraph
 
 
 def main() -> None:
@@ -34,14 +37,14 @@ def main() -> None:
     )
     agent: CompiledStateGraph = create_agent(
         model=ChatLiteLLM(
-            model="gemini/gemini-3-flash-preview",
+            model="gemini/gemini-3.1-flash-lite-preview",
             # For Vertex AI:
-            # model="vertex_ai/gemini-3-flash-preview",
+            # model="vertex_ai/gemini-3.1-flash-lite-preview",
             max_tokens=1000,
         ),
         tools=asyncio.run(mcp_client.get_tools()),
         name="HealthcareProviderAgent",
-        system_prompt="Find and list healthcare providers using the find_healthcare_providers MCP Tool.",
+        system_prompt="Find and list healthcare providers using the find_healthcare_providers MCP Tool. Only provide information that is given to you from the find_healthcare_providers tool results.",
     )
 
     agent_card = AgentCard(

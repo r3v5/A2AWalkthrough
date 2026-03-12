@@ -78,7 +78,7 @@ requires-dist = [
     { name = "langchain-mcp-adapters", specifier = "==0.1.11" },
     { name = "langgraph", specifier = "==1.0.2" },
     { name = "langgraph-a2a-server", specifier = "==0.1.6" },
-    { name = "litellm", specifier = "==1.80.16" },
+    { name = "litellm", specifier = ">=1.80.16" },
     { name = "mcp", specifier = "==1.19.0" },
     { name = "nest-asyncio" },
     { name = "python-dotenv" },
